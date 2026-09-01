@@ -1,0 +1,1 @@
+import{l as e,o as t}from"./index-B7fxLJ5C.js";import"./utils-fec71534-SDU5lF7A.js";import{t as n}from"./item-section-utils-ebaaf760-D8j5LbMx.js";var r=class{constructor(t){e(this,t),this.imageSize=void 0}componentDidRender(){n(this.host)}get host(){return t(this)}};export{r as atomic_product_section_visual};

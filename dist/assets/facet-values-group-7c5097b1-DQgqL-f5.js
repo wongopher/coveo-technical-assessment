@@ -1,0 +1,1 @@
+import{c as e}from"./index-B7fxLJ5C.js";import{t}from"./fieldset-group-6e41402f-Qim9WTp1.js";var n=(n,r)=>{if(!n.label)return r;let i=n.i18n.t(n.label),a=n.query===void 0?n.i18n.t(`facet-values`,{label:i}):n.i18n.t(`facet-search-results`,{query:n.query,label:i});return e(t,{label:a},r)};export{n as t};

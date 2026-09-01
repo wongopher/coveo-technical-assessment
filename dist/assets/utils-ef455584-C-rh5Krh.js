@@ -1,0 +1,1 @@
+var e=(e,t,n)=>n?``:t?e.t(`no-results-for`,{interpolation:{escapeValue:!1},query:t}):e.t(`no-results`);export{e as t};

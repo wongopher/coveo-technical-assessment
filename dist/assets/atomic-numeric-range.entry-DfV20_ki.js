@@ -1,0 +1,1 @@
+import{l as e,o as t}from"./index-B7fxLJ5C.js";var n=class{constructor(t){e(this,t),this.endInclusive=!1,this.label=void 0,this.start=void 0,this.end=void 0,this.endInclusive=!1}get host(){return t(this)}};export{n as atomic_numeric_range};

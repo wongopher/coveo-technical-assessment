@@ -1,0 +1,1 @@
+import{t as e}from"./tab-utils-35886d3e-BdtfwE6H.js";function t(t,n,r,i){if(!i||t.length===0&&n.length===0||!r)return;let a=e(t,n,r);if(a&&!i.state.enabled){i.enable();return}if(!a&&i.state.enabled){i.disable();return}}export{t};

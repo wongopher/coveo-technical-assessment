@@ -1,0 +1,1 @@
+import{c as e,t}from"./index-B7fxLJ5C.js";import{n}from"./initialization-utils-18d62c3c-uA-afwMF.js";var r=({hasError:r,enabled:i,firstSearchExecuted:a,hasResults:o},s)=>r||!i||a&&!o?e(n,null):e(t,null,s);export{r as t};

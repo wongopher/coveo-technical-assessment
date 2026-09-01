@@ -1,0 +1,1 @@
+function e(e,n){return e.querySelector(t(n))}function t(e){return`atomic-layout-section[section="${e}"]`}export{t as n,e as t};

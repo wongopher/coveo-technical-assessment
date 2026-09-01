@@ -1,0 +1,1 @@
+import{c as e,t}from"./index-B7fxLJ5C.js";var n=({i18n:n,key:r,params:i,count:a})=>{let o=e=>`${e}`,s=e=>i[e.slice(1)],c=Object.fromEntries(Object.keys(i).map(e=>[e,o(e)])),l=n.t(r,{interpolation:{escapeValue:!1},count:a,...c});return e(t,null,l.split(``).map(e=>e.startsWith(``)?s(e):e))};export{n as t};

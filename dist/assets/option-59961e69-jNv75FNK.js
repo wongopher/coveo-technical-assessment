@@ -1,0 +1,1 @@
+import{c as e}from"./index-B7fxLJ5C.js";var t=({value:t,selected:n,i18n:r,label:i})=>e(`option`,{value:t,selected:n},r.t(i));export{t};

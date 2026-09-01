@@ -1,0 +1,1 @@
+import{n as e,r as t}from"./item-decorators-9523f320-CMwpc_Pw.js";function n(e={folded:!1}){return t({parentName:`atomic-product`,folded:e.folded})}function r(){return e()}export{n,r as t};

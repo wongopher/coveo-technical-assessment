@@ -1,0 +1,1 @@
+import{l as e}from"./index-B7fxLJ5C.js";var t=class{constructor(t){e(this,t),this.section=void 0,this.minWidth=void 0,this.maxWidth=void 0}};export{t as atomic_layout_section};

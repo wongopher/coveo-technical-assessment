@@ -1,0 +1,1 @@
+import{t as e}from"./event-utils-8de63ec3-kr-KvioE.js";var t=`atomic/tabRendered`,n=n=>{let r=e(t,{});n.dispatchEvent(r)};export{n as t};

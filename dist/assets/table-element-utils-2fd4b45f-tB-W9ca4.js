@@ -1,0 +1,1 @@
+var e=`atomic-table-element`;export{e as t};

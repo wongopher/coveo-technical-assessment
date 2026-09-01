@@ -1,0 +1,1 @@
+import{c as e,t}from"./index-B7fxLJ5C.js";var n=({hasError:n,hasItems:r,firstRequestExecuted:i,hasTemplate:a,templateHasError:o},s)=>{if(!(n||i&&!r||!a))return e(t,null,o&&e(`slot`,null),...s)};export{n as t};
