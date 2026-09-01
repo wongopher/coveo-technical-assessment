@@ -9,9 +9,9 @@ export default defineConfig({
     react(),
     viteStaticCopy({
       targets: [
-        { src: 'node_modules/@coveo/atomic-react/dist/assets', dest: '.' },
-        { src: 'node_modules/@coveo/atomic-react/dist/lang', dest: '.' },
-        { src: 'node_modules/@coveo/atomic/dist/atomic/themes', dest: '.' },
+        { src: 'node_modules/@coveo/atomic/dist/assets', dest: '.' },
+        { src: 'node_modules/@coveo/atomic/dist/lang', dest: '.' },
+        { src: 'node_modules/@coveo/atomic/dist/themes', dest: '.' },
       ],
     }),
   ],

@@ -13,12 +13,15 @@ export function SortControl() {
 
   useEffect(() => {
     const search = getSearch()
-    return search.subscribe(() => {
-      const match = SORT_OPTIONS.find((option) => search.sort().isSortedBy(option.criterion))
+    const sort = search.sort()
+    const sync = () => {
+      const match = SORT_OPTIONS.find((option) => sort.isSortedBy(option.criterion))
       if (match) {
         setActive(match.id)
       }
-    })
+    }
+    sync()
+    return search.subscribe(sync)
   }, [])
 
   const onChange = (id: string) => {

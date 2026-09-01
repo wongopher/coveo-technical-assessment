@@ -1,4 +1,3 @@
-import type { Search } from '@coveo/headless/commerce'
 import {
   loadCategoryFacetSetActions,
   loadCoreFacetActions,
@@ -15,23 +14,29 @@ const displayLimitSynced = new Set<string>()
 
 export const isSyncingFacetDisplayLimits = (): boolean => syncingFacetDisplayLimits
 
+type FacetForDisplayLimits = {
+  state: {
+    facetId: string
+    type?: string
+    canShowLessValues?: boolean
+    values: unknown[]
+  }
+}
+
 /**
  * Coveo Commerce defaults to 8 facet values, so "Show more" appears when a
  * ninth option exists. Bump the request to 10 so the control only shows when
  * there are more than ten options in the index.
  */
-export const syncFacetDisplayLimits = (search: Search): void => {
-  if (syncingFacetDisplayLimits) return
+export const syncFacetDisplayLimits = (facets: FacetForDisplayLimits[]): void => {
+  if (syncingFacetDisplayLimits || facets.length === 0) return
 
   const engine = getEngine()
-  if (!search.state.responseId) return
-
-  const generator = search.facetGenerator()
   const coreActions = loadCoreFacetActions(engine)
   const categoryActions = loadCategoryFacetSetActions(engine)
   let needsSearch = false
 
-  for (const facet of generator.facets) {
+  for (const facet of facets) {
     const { facetId, type, canShowLessValues, values } = facet.state
 
     if (canShowLessValues) continue
@@ -103,9 +108,9 @@ const facetHasSelectableValues = (facet: FacetWithValues): boolean => {
 }
 
 /** Hide Atomic facet hosts that have no values for the current result set. */
-export const hideEmptyFacets = (search: Search): void => {
+export const hideEmptyFacets = (facets: FacetWithValues[]): void => {
   const byField = new Map<string, boolean>()
-  for (const facet of search.facetGenerator().facets) {
+  for (const facet of facets) {
     const field = facet.state.field || facet.state.facetId
     if (!field) continue
     byField.set(field, facetHasSelectableValues(facet))

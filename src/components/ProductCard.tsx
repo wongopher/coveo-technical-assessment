@@ -14,11 +14,14 @@ import {
 } from '../lib/catalog'
 import {
   configurationStore,
+  isAnchored,
   isShortlisted,
+  MAX_SELECTED_ROBOTS,
   useConfigurationState,
 } from '../lib/configurationStore'
 import { useHighlightSeries } from '../lib/hooks'
-import { clearRobotFilter, selectSeries } from '../lib/search'
+import { toAnchor, registerRobot } from '../lib/robotDirectory'
+import { toggleSelectedRobot } from '../lib/search'
 import { CARD_CSS } from './cardCss'
 
 interface Props {
@@ -30,26 +33,21 @@ export function ProductCard({ product }: Props) {
   const highlightSeries = useHighlightSeries()
   const robot = isRobot(product)
   const series = robotSeriesIdentity(product)
+  if (robot) registerRobot(product)
   const chips = specChips(product)
   const shortlisted = isShortlisted(config, product.permanentid)
 
-  const anchored = config.anchor?.permanentid === product.permanentid
-  const fitsAnchor =
-    config.anchor && !robot
-      ? series.some((entry) => config.anchor?.series.includes(entry))
-      : false
+  const anchored = isAnchored(config, product.permanentid)
+  const atLimit = !anchored && config.anchors.length >= MAX_SELECTED_ROBOTS
+  const matchingRobots = robot
+    ? []
+    : config.anchors.filter((anchor) =>
+        series.some((entry) => anchor.series.includes(entry))
+      )
+  const fitsAnchor = matchingRobots.length > 0
 
   const startConfiguration = () => {
-    if (series.length) {
-      selectSeries(series)
-    }
-    configurationStore.setAnchor({
-      permanentid: product.permanentid,
-      name: product.ec_name ?? 'Selected robot',
-      series,
-      clickUri: product.clickUri,
-      imageUrl: product.ec_thumbnails?.[0],
-    })
+    toggleSelectedRobot(toAnchor(product))
   }
 
   return (
@@ -67,7 +65,7 @@ export function ProductCard({ product }: Props) {
         </p>
 
         <h3 className="card__title">
-          <AtomicProductLink />
+          <AtomicProductLink>{product.ec_name}</AtomicProductLink>
         </h3>
 
         {product.ec_shortdesc && <p className="card__desc">{product.ec_shortdesc}</p>}
@@ -102,7 +100,9 @@ export function ProductCard({ product }: Props) {
         )}
 
         {fitsAnchor && (
-          <p className="card__reason">Fits your {config.anchor?.name}</p>
+          <p className="card__reason">
+            Fits your {matchingRobots.map((robot) => robot.name).join(', ')}
+          </p>
         )}
 
         <div className="card__meta">
@@ -115,9 +115,14 @@ export function ProductCard({ product }: Props) {
             <button
               type="button"
               className={`btn${anchored ? ' btn--active' : ' btn--primary'}`}
-              onClick={anchored ? clearRobotFilter : startConfiguration}
+              disabled={atLimit}
+              onClick={startConfiguration}
             >
-              {anchored ? 'Parts for this robot' : 'Find parts for this'}
+              {anchored
+                ? 'Parts for this robot'
+                : atLimit
+                  ? 'Limit 3 robots'
+                  : 'Find parts for this'}
             </button>
           ) : null}
 

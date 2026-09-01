@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@coveo/atomic-react": "^3.1.7",
-    "@coveo/headless": "^3.4.1",
+    "@coveo/atomic-react": "3.11.16",
+    "@coveo/headless": "3.49.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

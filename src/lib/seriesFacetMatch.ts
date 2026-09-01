@@ -32,6 +32,58 @@ const splitJoinedSeries = (value: string): string[] | null => {
   return parts
 }
 
+/** Split Atomic's joined `C-5,R-20` facet value into the real series codes. */
+export const expandSeriesValues = (values: string[]): string[] => [
+  ...new Set(values.flatMap((value) => splitJoinedSeries(value) ?? [value])),
+]
+
+export const isJoinedSeriesValue = (value: string): boolean => splitJoinedSeries(value) !== null
+
+const seriesHashValue = (series: string[]): string =>
+  [...new Set(series)].map((value) => encodeURIComponent(value)).join(',')
+
+const hashWithoutSeries = (raw: string): string =>
+  raw
+    .split('&')
+    .filter((part) => part && !part.startsWith(`${SERIES_HASH_KEY}=`))
+    .join('&')
+
+/** Read Compatible Robots series from the location hash. */
+export const seriesFromHash = (): string[] => {
+  const raw = window.location.hash.slice(1)
+  if (!raw) return []
+  const encoded = new URLSearchParams(raw).get(SERIES_HASH_KEY)
+  if (!encoded) return []
+  return expandSeriesValues([encoded])
+}
+
+/**
+ * Write `f-compatible_robot_series` as Atomic multi-select (`R-20,C-10`,
+ * raw commas) so the URL matches the pin and the facet checkboxes.
+ */
+export const writeCompatibleRobotsHash = (series: string[]): void => {
+  const raw = window.location.hash.slice(1)
+  const rest = hashWithoutSeries(raw)
+  const next =
+    series.length === 0
+      ? rest
+      : [rest, `${SERIES_HASH_KEY}=${seriesHashValue(series)}`].filter(Boolean).join('&')
+  if (next === raw) return
+  const current = seriesFromHash()
+  if (
+    current.length === series.length &&
+    [...current].sort().every((value, index) => value === [...series].sort()[index])
+  ) {
+    return
+  }
+
+  history.replaceState(
+    null,
+    document.title,
+    `${window.location.pathname}${window.location.search}${next ? `#${next}` : ''}`
+  )
+}
+
 const expandJoinedSeriesValues = (values: FacetValue[]): FacetValue[] | null => {
   if (
     !values.some(
@@ -78,6 +130,12 @@ export const normalizeCompatibleRobotsHash = (): void => {
     document.title,
     `${window.location.pathname}${window.location.search}#${next}`
   )
+}
+
+/** Keep rewriting the hash as Atomic appends `q=` (it re-joins multi-select with `%2C`). */
+export const watchCompatibleRobotsHash = (): void => {
+  normalizeCompatibleRobotsHash()
+  window.addEventListener('hashchange', () => normalizeCompatibleRobotsHash(), true)
 }
 
 /**

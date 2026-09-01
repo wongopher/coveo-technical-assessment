@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react'
 import { formatSeriesList } from '../lib/catalog'
-import { useConfigurationState } from '../lib/configurationStore'
+import { MAX_SELECTED_ROBOTS, useConfigurationState } from '../lib/configurationStore'
 import { useActiveSeries, useRobotFilter } from '../lib/hooks'
 import { browseRobots, clearRobotFilter } from '../lib/search'
+import { SelectedRobots } from './SelectedRobots'
 
 type RobotFilterPlacement = 'mobile' | 'sidebar'
 
@@ -15,11 +16,11 @@ type RobotFilterPlacement = 'mobile' | 'sidebar'
  * column (above Category, beside the search header) on desktop.
  */
 export function RobotFilterBar({ placement }: { placement: RobotFilterPlacement }) {
-  const { anchor } = useConfigurationState()
+  const { anchors } = useConfigurationState()
   const pinned = useRobotFilter()
   const activeSeries = useActiveSeries()
   const cardRef = useRef<HTMLDivElement>(null)
-  const empty = !anchor && !pinned.browseRobots && activeSeries.length === 0
+  const empty = anchors.length === 0 && !pinned.browseRobots && activeSeries.length === 0
 
   useLayoutEffect(() => {
     if (placement !== 'sidebar') return
@@ -29,6 +30,10 @@ export function RobotFilterBar({ placement }: { placement: RobotFilterPlacement 
 
     const syncHeight = () => {
       if (getComputedStyle(card).display === 'none') {
+        card.style.removeProperty('height')
+        return
+      }
+      if (anchors.length > 1) {
         card.style.removeProperty('height')
         return
       }
@@ -42,26 +47,28 @@ export function RobotFilterBar({ placement }: { placement: RobotFilterPlacement 
       observer.disconnect()
       card.style.removeProperty('height')
     }
-  }, [placement, empty])
+  }, [placement, empty, anchors.length])
 
-  let title: string
-  let detail: string
+  let title = 'Have a specific robot?'
+  let detail = 'Choose your machine to only show compatible parts.'
 
-  if (anchor) {
-    title = `Parts for ${anchor.name}`
+  if (anchors.length > 0) {
+    title =
+      anchors.length === 1
+        ? `Parts for ${anchors[0].name}`
+        : `Parts for ${anchors.length} robots`
     detail =
-      activeSeries.length > 0
-        ? `Showing parts compatible with ${formatSeriesList(activeSeries)}`
-        : 'Select compatible parts for this robot'
+      anchors.length >= MAX_SELECTED_ROBOTS
+        ? 'Maximum of 3 robots. Remove one to add another.'
+        : activeSeries.length > 0
+          ? `Showing parts compatible with ${formatSeriesList(activeSeries)}`
+          : 'Select compatible parts for these robots'
   } else if (activeSeries.length > 0) {
     title = 'Filtering by compatible robot'
     detail = `Showing parts that fit ${formatSeriesList(activeSeries)}`
   } else if (pinned.browseRobots) {
     title = 'Browsing robots'
     detail = 'Pick your robot, then search for compatible parts'
-  } else {
-    title = 'Have a specific robot?'
-    detail = 'Choose your machine to only show compatible parts.'
   }
 
   return (
@@ -72,20 +79,18 @@ export function RobotFilterBar({ placement }: { placement: RobotFilterPlacement 
       aria-live="polite"
     >
       <div className="robot-filter-bar__inner">
-        <div className="robot-filter-bar__lead">
-          {anchor?.imageUrl ? (
-            <img
-              className="robot-filter-bar__thumb"
-              src={anchor.imageUrl}
-              alt=""
-              width={48}
-              height={48}
-            />
-          ) : null}
-          <div className="robot-filter-bar__copy">
-            <span className="robot-filter-bar__label">{title}</span>
+        <div className="robot-filter-bar__lead" aria-label={title}>
+          {anchors.length > 0 ? (
+            <SelectedRobots robots={anchors} compact seriesFilter={activeSeries} />
+          ) : (
+            <div className="robot-filter-bar__copy">
+              <span className="robot-filter-bar__label">{title}</span>
+              <span className="robot-filter-bar__detail">{detail}</span>
+            </div>
+          )}
+          {anchors.length > 0 && (
             <span className="robot-filter-bar__detail">{detail}</span>
-          </div>
+          )}
         </div>
         {empty ? (
           <button type="button" className="btn btn--primary" onClick={browseRobots}>

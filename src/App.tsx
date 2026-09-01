@@ -17,6 +17,7 @@ import { ProductCard } from './components/ProductCard'
 import { ConfigurationPanel } from './components/ConfigurationPanel'
 import { RobotFilterBar } from './components/RobotFilterBar'
 import { SearchBootstrap } from './components/SearchBootstrap'
+import { KnowledgePanel } from './components/KnowledgePanel'
 import { PerPageControl } from './components/PerPageControl'
 import { SortControl } from './components/SortControl'
 import './styles.css'
@@ -113,6 +114,7 @@ export default function App() {
       </AtomicCommerceInterface>
 
       <ConfigurationPanel />
+      <KnowledgePanel />
     </div>
   )
 }

@@ -7,6 +7,8 @@ import type { Product } from '@coveo/headless/commerce'
  * and read through useSyncExternalStore.
  */
 
+export const MAX_SELECTED_ROBOTS = 3
+
 export interface ConfigurationAnchor {
   permanentid: string
   name: string
@@ -16,11 +18,11 @@ export interface ConfigurationAnchor {
 }
 
 export interface ConfigurationState {
-  anchor: ConfigurationAnchor | null
+  anchors: ConfigurationAnchor[]
   shortlist: Product[]
 }
 
-let state: ConfigurationState = { anchor: null, shortlist: [] }
+let state: ConfigurationState = { anchors: [], shortlist: [] }
 const listeners = new Set<() => void>()
 
 const emit = () => {
@@ -32,6 +34,13 @@ const setState = (next: ConfigurationState) => {
   emit()
 }
 
+const anchorsEqual = (a: ConfigurationAnchor[], b: ConfigurationAnchor[]): boolean =>
+  a.length === b.length && a.every((anchor, index) => anchor.permanentid === b[index]?.permanentid)
+
+export const uniqueSeries = (anchors: ConfigurationAnchor[]): string[] => [
+  ...new Set(anchors.flatMap((anchor) => anchor.series)),
+]
+
 export const configurationStore = {
   subscribe(listener: () => void) {
     listeners.add(listener)
@@ -40,11 +49,26 @@ export const configurationStore = {
   getSnapshot(): ConfigurationState {
     return state
   },
-  setAnchor(anchor: ConfigurationAnchor | null) {
-    setState({ ...state, anchor })
+  setAnchors(anchors: ConfigurationAnchor[]) {
+    const next = anchors.slice(0, MAX_SELECTED_ROBOTS)
+    if (anchorsEqual(state.anchors, next)) return
+    setState({ ...state, anchors: next })
   },
-  clearAnchor() {
-    setState({ ...state, anchor: null })
+  addAnchor(anchor: ConfigurationAnchor) {
+    if (state.anchors.some((entry) => entry.permanentid === anchor.permanentid)) return
+    if (state.anchors.length >= MAX_SELECTED_ROBOTS) return
+    setState({ ...state, anchors: [...state.anchors, anchor] })
+  },
+  removeAnchor(permanentid: string) {
+    if (!state.anchors.some((entry) => entry.permanentid === permanentid)) return
+    setState({
+      ...state,
+      anchors: state.anchors.filter((entry) => entry.permanentid !== permanentid),
+    })
+  },
+  clearAnchors() {
+    if (state.anchors.length === 0) return
+    setState({ ...state, anchors: [] })
   },
   toggleShortlist(product: Product) {
     const exists = state.shortlist.some((item) => item.permanentid === product.permanentid)
@@ -79,3 +103,8 @@ export const isShortlisted = (
   state: ConfigurationState,
   permanentid: string
 ): boolean => state.shortlist.some((item) => item.permanentid === permanentid)
+
+export const isAnchored = (
+  state: ConfigurationState,
+  permanentid: string
+): boolean => state.anchors.some((anchor) => anchor.permanentid === permanentid)

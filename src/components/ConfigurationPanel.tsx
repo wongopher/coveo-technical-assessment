@@ -15,18 +15,18 @@ import { useActiveSeries } from '../lib/hooks'
  * line items an integrator or plant engineer would take to procurement.
  */
 export function ConfigurationPanel() {
-  const { anchor, shortlist } = useConfigurationState()
-  const series = useActiveSeries()
+  const { anchors, shortlist } = useConfigurationState()
+  const activeSeries = useActiveSeries()
 
-  if (!anchor && shortlist.length === 0) {
+  if (anchors.length === 0 && shortlist.length === 0) {
     return null
   }
 
   const total = shortlist.reduce((sum, item) => sum + (item.ec_price ?? 0), 0)
-
-  const resetAnchor = () => {
-    clearRobotFilter()
-  }
+  const mismatchLabel =
+    activeSeries.length === 1
+      ? `Doesn't fit ${activeSeries[0]}`
+      : `Doesn't fit any selected robot`
 
   return (
     <aside className="config-panel" aria-label="Your parts">
@@ -34,14 +34,14 @@ export function ConfigurationPanel() {
         <div className="config-panel__head">
           <div>
             <h2 className="config-panel__title">Your parts</h2>
-            {anchor ? (
+            {anchors.length === 1 ? (
               <p className="config-panel__anchor">
-                Parts for <strong>{anchor.name}</strong>
-                <span className="config-panel__series">{anchor.series.join(' · ')}</span>
+                Parts for <strong>{anchors[0].name}</strong>
+                <span className="config-panel__series">{anchors[0].series.join(' · ')}</span>
               </p>
-            ) : series.length > 0 ? (
+            ) : activeSeries.length > 0 ? (
               <p className="config-panel__anchor">
-                Showing parts that fit <strong>{formatSeriesList(series)}</strong>.{' '}
+                Showing parts that fit <strong>{formatSeriesList(activeSeries)}</strong>.{' '}
                 <button type="button" className="btn btn--link" onClick={browseRobots}>
                   Pick a specific robot
                 </button>{' '}
@@ -58,8 +58,8 @@ export function ConfigurationPanel() {
             )}
           </div>
           <div className="config-panel__head-actions">
-            {anchor && (
-              <button type="button" className="btn btn--ghost" onClick={resetAnchor}>
+            {anchors.length === 1 && (
+              <button type="button" className="btn btn--ghost" onClick={clearRobotFilter}>
                 Clear robot
               </button>
             )}
@@ -92,10 +92,16 @@ export function ConfigurationPanel() {
               <tbody>
                 {shortlist.map((item) => {
                   const joints = compatibleJoints(item)
-                  const series = robotSeriesIdentity(item)
+                  const itemSeries = robotSeriesIdentity(item)
                   const imageUrl = item.ec_thumbnails?.[0]
+                  const incompatible =
+                    activeSeries.length > 0 &&
+                    !itemSeries.some((entry) => activeSeries.includes(entry))
                   return (
-                    <tr key={item.permanentid}>
+                    <tr
+                      key={item.permanentid}
+                      className={incompatible ? 'compare__row--mismatch' : undefined}
+                    >
                       <th scope="row">
                         <div className="compare__item">
                           {imageUrl ? (
@@ -109,15 +115,37 @@ export function ConfigurationPanel() {
                           ) : (
                             <span className="compare__thumb compare__thumb--empty" aria-hidden="true" />
                           )}
-                          <a href={item.clickUri} target="_blank" rel="noreferrer">
-                            {item.ec_name}
-                          </a>
+                          <div className="compare__item-copy">
+                            <a href={item.clickUri} target="_blank" rel="noreferrer">
+                              {item.ec_name}
+                            </a>
+                            {incompatible && (
+                              <p className="compare__mismatch">{mismatchLabel}</p>
+                            )}
+                          </div>
                         </div>
                       </th>
                       <td>{topCategory(item)}</td>
                       <td>{categoryLeaf(item)}</td>
                       <td>{joints.length ? joints.join(', ') : '—'}</td>
-                      <td>{series.length ? series.join(' · ') : '—'}</td>
+                      <td>
+                        {itemSeries.length ? (
+                          <span className="compare__fits">
+                            {itemSeries.map((entry) => (
+                              <span
+                                key={entry}
+                                className={`pill${
+                                  activeSeries.includes(entry) ? ' pill--match' : ''
+                                }`}
+                              >
+                                {entry}
+                              </span>
+                            ))}
+                          </span>
+                        ) : (
+                          '—'
+                        )}
+                      </td>
                       <td>{formatPrice(item.ec_price)}</td>
                       <td>
                         <button

@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { configurationStore } from './configurationStore'
+import { configurationStore, uniqueSeries } from './configurationStore'
 import { robotFilterStore, type PinnedRobotFilter } from './robotFilter'
 import { getActiveSeries, getSearch, isRobotJourneyActive, selectedSeries } from './search'
 
@@ -37,7 +37,7 @@ const subscribeToHighlightSeries = (onChange: () => void) => {
 const highlightSeriesSnapshot = (): string => {
   const pinned = robotFilterStore.getSnapshot()
   if (pinned.series.length > 0) return pinned.series.join(',')
-  return configurationStore.getSnapshot().anchor?.series.join(',') ?? ''
+  return uniqueSeries(configurationStore.getSnapshot().anchors).join(',')
 }
 
 const robotJourneySnapshot = () => (isRobotJourneyActive() ? '1' : '')

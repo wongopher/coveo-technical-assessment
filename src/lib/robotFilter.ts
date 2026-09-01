@@ -24,10 +24,18 @@ export const robotFilterStore = {
     return pinned
   },
   pinBrowseRobots() {
+    if (pinned.browseRobots && pinned.series.length === 0) return
     pinned = { browseRobots: true, series: [] }
     emit()
   },
   pinSeries(series: string[]) {
+    if (
+      !pinned.browseRobots &&
+      pinned.series.length === series.length &&
+      pinned.series.every((value, index) => value === series[index])
+    ) {
+      return
+    }
     pinned = { browseRobots: false, series: [...series] }
     emit()
   },
