@@ -2,7 +2,9 @@
 
 For **sales engineers and AEs**. About **eight minutes** with a manufacturing prospect (plant engineering, aftermarket, procurement). You are showing RoboMotion Industries — a fictitious industrial robotics company — how Coveo turns a parts catalog into a fitment journey.
 
-The buyer already owns a robot. They need tooling and consumables that fit, then a list they can send to procurement. Do not demo a three-robot compare tray.
+The buyer already owns a **robot**. They need tooling and consumables that fit, then a list they can send to procurement. Do not demo a three-robot compare tray.
+
+Say **robot** whenever you point at the page (Compatible Robots, Find parts for your robot, Your parts). Say **welding arm** only when you click that query suggestion — then immediately: the grid is torches. Say **welding cell** only in the chatbot; that is a spec question, not a SKU.
 
 Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](README.md).
 
@@ -17,7 +19,7 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 
 Say:
 
-> RoboMotion sells cells, then lives on parts and service. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the machine on the line — usually an R-20 welding cell — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a cell-spec question without leaving the page.
+> RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — usually an R-20 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
 
 Point at the chrome: **Industrial robotics · Parts & service**, and the hero **Find the right parts for your robot**. Then type.
 
@@ -79,7 +81,7 @@ Do not dwell if the buttons do not call a backend. The list is the payload.
 
 > How do I spec a MIG welding cell?
 
-**Say:** Cell-spec knowledge lives in articles. Conversational search answers on the page, with citations. A follow-up stays in the chat so the parts list and the robot pin do not move.
+**Say:** Not every question is a part number. Spec knowledge lives in articles. Conversational search answers on the page, with citations. A follow-up stays in the chat so the parts list and the robot pin do not move.
 
 **Value:** Self-service. Fewer “call an applications engineer” loops on spec questions.
 
@@ -89,9 +91,9 @@ Close chat (button, Escape, or click outside) and leave the catalogue as it is.
 
 | They say | You say |
 | --- | --- |
-| Why did welding arm return torches? | That is the catalog: parts that fit a welding cell, not a robot showroom. Coveo is following the index, not a spec sheet. |
+| Why did welding arm return torches? | That is the catalog: parts that fit a robot, not a robot showroom. Coveo is following the index, not a spec sheet. |
 | Where is payload / reach / certification? | Not fields today. Category leaves encode payload bands for robots. Production is to index those specs so they can filter and rank — that is the Coveo catalog conversation. |
-| Can I compare three arms? | The buying motion here is parts against an installed series. Your parts is that comparison, including mismatch rows. |
+| Can I compare three robots? | The buying motion here is parts against an installed robot. Your parts is that comparison, including mismatch rows. |
 | Quote does nothing. | Demo handoff. The list is what CPQ would accept. |
 | Can chat add a part to the grid? | On purpose, no. Chat is knowledge. Catalogue search is products. Mixing them would wipe the fitment filter. |
 
@@ -102,7 +104,7 @@ Close chat (button, Escape, or click outside) and leave the catalogue as it is.
 | Chat missing or 403 | The search key needs **Execute agent queries**. Say it is an org privilege. The catalogue demo still stands — do not fake an answer. |
 | Labels like `no-products` | Atomic assets did not copy. Restart Vite after `npm install`. Do not debug CSS in front of the customer. |
 | Pin drops after typing | Click **Find parts for this** again and continue. |
-| Agent cannot answer | Ask the cell-spec question above, not a random SKU. Knowledge is grounded on the blog index, not product JSON. |
+| Agent cannot answer | Ask **How do I spec a MIG welding cell?** — not a random SKU. Knowledge is grounded on the blog index, not product JSON. |
 
 ## If a technical buyer stays after
 
