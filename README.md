@@ -34,18 +34,6 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 
 The key is anonymous-search scoped. It is still gitignored; never commit `.env`.
 
-## What the catalog actually has
-
-The live org is a **fitment / aftermarket catalog**, not a robot catalog. 1,242 products, of which **61 are Robots**. A `welding arm` query returns welding **torches**.
-
-Facets returned (not the PDF’s payload / reach / models list):
-
-- `ec_category` (hierarchical)
-- `compatible_robot_series` — display name **Compatible Robots** (not “Compatible Robot Models”)
-- `ec_brand`, `ec_price`, `ec_rating`
-
-Payload, reach, precision, mounting, and certification are **not indexed**. Payload bands exist only as category-leaf labels (e.g. `Large Articulated (50-200kg)`). Cards use structured fields only, with one documented exception: robot series codes are parsed from `ec_name` when `compatible_robot_series` is missing on robot listings.
-
 ## Architecture
 
 ```
@@ -70,7 +58,8 @@ chatbot question  → SearchEngine (pipeline: default) → Search Agent over the
 
 ## Known limits
 
-- **Indexing gap:** payload, reach, precision, mounting, and certification should be structured fields in production. They are not regexed out of `ec_shortdesc`.
+- **Fitment catalog, not a robot catalog.** The live org has 1,242 products, of which **61 are Robots**. A `welding arm` query returns welding **torches**. That is the index, not a ranking bug.
+- **Indexing gap vs the brief.** The PDF’s payload / reach / models list is not in the index. Facets returned: `ec_category` (hierarchical), `compatible_robot_series` (display name **Compatible Robots**, not “Compatible Robot Models”), `ec_brand`, `ec_price`, `ec_rating`. Payload, reach, precision, mounting, and certification are not structured fields and are not regexed out of `ec_shortdesc`. Payload bands exist only as category-leaf labels (e.g. `Large Articulated (50-200kg)`). Cards stay on structured fields, with one exception: robot series codes are parsed from `ec_name` when `compatible_robot_series` is missing on robot listings.
 - **Atomic clears facets on a new query.** Compatible Robots is re-applied from a pin store so the robot-then-parts journey survives typing.
 - **Joined series values.** Atomic may send `R-20,C-10` as one facet value. The request (and URL hash) are expanded back into real series codes before they leave the browser.
 - **Atomic for Commerce is open beta.** Labels showing as keys such as `no-products` usually mean Atomic assets failed to copy; `vite-plugin-static-copy` serves `@coveo/atomic` `assets`, `lang`, and `themes` from the public root.
