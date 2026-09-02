@@ -17,8 +17,6 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 
 ## Opening (about one minute)
 
-Say:
-
 > RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — usually an R-20 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
 
 Point at the chrome: **Industrial robotics · Parts & service**, and the hero **Find the right parts for your robot**. Then type.
@@ -31,7 +29,7 @@ Point at the chrome: **Industrial robotics · Parts & service**, and the hero **
 
 **Say:** A plant engineer starts in their language. Suggestions meet them there.
 
-**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog. Robots rarely win a blank search.
+**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog.
 
 **Point at the left rail:** Category, Compatible Robots, Brand, Price, Rating.
 
@@ -39,11 +37,11 @@ Point at the chrome: **Industrial robotics · Parts & service**, and the hero **
 
 ### 2. Start from the installed machine
 
-**Show:** **Find parts for your robot** (sidebar, or the mobile bar). Open a **NexBot R-20**.
+**Show:** **Find parts for your robot** (sidebar). Open a **NexBot R-20**.
 
 **Say:** Robots are a small slice of the catalog, so we give the buyer an explicit path to the machine already on the line.
 
-**On the card:** Class/type comes from the category (for example Large Articulated 50–200kg). Brand is shown as Line. Payload and reach are not indexed fields — in production those become filters. Do not apologize; treat it as the catalog-quality conversation every manufacturing deal needs.
+**On the card:** Class/type comes from the category (for example Large Articulated 50–200kg). Brand is shown as Line. Payload and reach are not indexed fields — in production those become filters.
 
 ### 3. Pin the series — only what fits remains
 
@@ -87,9 +85,9 @@ Do not dwell if the buttons do not call a backend. The list is the payload.
 
 Close chat (button, Escape, or click outside) and leave the catalogue as it is.
 
-## If they object
+## Questions
 
-| They say | You say |
+| Question | Answer |
 | --- | --- |
 | Why did welding arm return torches? | That is the catalog: parts that fit a robot, not a robot showroom. Coveo is following the index, not a spec sheet. |
 | Where is payload / reach / certification? | Not fields today. Category leaves encode payload bands for robots. Production is to index those specs so they can filter and rank — that is the Coveo catalog conversation. |
@@ -105,13 +103,3 @@ Close chat (button, Escape, or click outside) and leave the catalogue as it is.
 | Labels like `no-products` | Atomic assets did not copy. Restart Vite after `npm install`. Do not debug CSS in front of the customer. |
 | Pin drops after typing | Click **Find parts for this** again and continue. |
 | Agent cannot answer | Ask **How do I spec a MIG welding cell?** — not a random SKU. Knowledge is grounded on the blog index, not product JSON. |
-
-## If a technical buyer stays after
-
-Keep this short. The README has the implementation.
-
-- **Catalogue** uses Coveo Atomic for Commerce on a Commerce engine (product search, facets, grid).
-- **Chat** uses a separate Search engine and Search Agent on the blog index so a follow-up cannot clear Compatible Robots.
-- The pin that survives a new parts query is the industry customization: stock Commerce search would treat a new query like a new search and drop the series.
-
-Do not open DevTools unless they ask. Close on value: faster discovery, a comparison they can trust, self-service, and a quote list procurement will send.
