@@ -1,62 +1,115 @@
-# Demo walkthrough
+# RoboMotion demo script
 
-About **eight minutes**. The story is: a manufacturing buyer needs to spec a welding cell, or service an installed robot. They do not compare three robots in a tray — they pin a series and build a parts list.
+For **sales engineers and AEs**. About **eight minutes** with a manufacturing prospect (plant engineering, aftermarket, procurement). You are showing RoboMotion Industries — a fictitious industrial robotics company — how Coveo turns a parts catalog into a fitment journey.
 
-## 1. Open the catalogue
+The buyer already owns a robot. They need tooling and consumables that fit, then a list they can send to procurement. Do not demo a three-robot compare tray.
 
-`npm run dev` → load the page.
+Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](README.md).
 
-Point at:
+## Before you go live
 
-- RoboMotion chrome (“Industrial robotics · Parts & service”)
-- Hero: “Find the right parts for your robot”
-- Full catalogue (1,242 products). Robots are only 61 of those, so they rarely surface on a blank search.
+- Use this path: `weld` → **welding arm** → **Find parts for your robot** → pin an **R-20** → add two parts → chat **How do I spec a MIG welding cell?**
+- Do not search `payload 50kg`. That is not a field in this catalog.
+- Ask follow-ups in the **chatbot** (top right), not in the catalogue search box. Chat must not look like it refreshed the parts grid.
+- Quote and download are demo buttons. Speak them as the handoff to CPQ, then move on.
 
-## 2. Query suggestions
+## Opening (about one minute)
 
-Type `weld` in the search box (it is a textarea — a buying question can be more than one line).
+Say:
 
-Coveo suggests **welding**, **welding arm**, **welding robot**, **welding cell**. Pick **welding arm**.
+> RoboMotion sells cells, then lives on parts and service. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the machine on the line — usually an R-20 welding cell — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a cell-spec question without leaving the page.
 
-The grid is welding **torches**, not arms. That is the catalog: fitment parts, not finished robots. Name the five Commerce facets in the left rail: Category, Compatible Robots, Brand, Price, Rating.
+Point at the chrome: **Industrial robotics · Parts & service**, and the hero **Find the right parts for your robot**. Then type.
 
-## 3. Find a robot, then pin the series
+## Walkthrough
 
-Click **Find parts for your robot** (sidebar / mobile bar). That hashes to Category = Robots, 48 per page, so all 61 machines are findable.
+### 1. They start with the job, not the SKU
 
-Open a card (e.g. a NexBot R-20). Spec chips are structured: class/type from the category leaf, brand as “Line”. Payload/reach are not indexed — that is the production gap.
+**Show:** Type `weld`. Coveo suggests **welding**, **welding arm**, **welding robot**, **welding cell**. Pick **welding arm**.
 
-Click **Find parts for this**. Compatible Robots is selected (max 3 robots). The grid is now parts that fit that series. Hero copy and hint queries switch to parts language (`MIG torch`, `safety scanner`, …).
+**Say:** A plant engineer starts in their language. Suggestions meet them there.
 
-## 4. Facets, cards, sort
+**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog. Robots rarely win a blank search.
 
-- Toggle another Compatible Robots value, or Brand / Price / Rating.
-- Query summary and breadbox stay in sync.
-- Custom **Sort** (not the stock Atomic dropdown): Best match, price, rating. The API only advertises relevance; field sorts are sent anyway and come back ordered.
-- Per page: 12 / 24 / 48.
+**Point at the left rail:** Category, Compatible Robots, Brand, Price, Rating.
 
-On a part card, point at series pills and the fitment line when a robot is anchored.
+**Value:** Faster discovery. Fewer bounced searches.
 
-## 5. Your parts
+### 2. Start from the installed machine
 
-On two part cards, click **Add to your parts**. The sticky **Your parts** panel is the next action: robot context, shortlist table (category, class/type, mounts at, fits, price), mismatch row if a part does not fit the pinned series.
+**Show:** **Find parts for your robot** (sidebar, or the mobile bar). Open a **NexBot R-20**.
 
-**Request a quote** / **Download parts list** are demo CTAs (no backend). The shortlist is not capped at 3; only robot anchors are.
+**Say:** Robots are a small slice of the catalog, so we give the buyer an explicit path to the machine already on the line.
 
-## 6. Ask the Agent a buying question
+**On the card:** Class/type comes from the category (for example Large Articulated 50–200kg). Brand is shown as Line. Payload and reach are not indexed fields — in production those become filters. Do not apologize; treat it as the catalog-quality conversation every manufacturing deal needs.
 
-Click the circular chat button in the **top-right**. In the popover, submit:
+### 3. Pin the series — only what fits remains
+
+**Show:** **Find parts for this.** Compatible Robots is selected (up to three machines). The grid is parts for that series. Hero copy and hint chips switch to parts language (`MIG torch`, `safety scanner`).
+
+**Say:** Once the series is known, everything else should disappear. Compatible Robots is the manufacturing equivalent of a size filter.
+
+**Optional proof:** Type `MIG torch` or click a hint. The pin stays. The buyer can keep searching without starting over.
+
+**Value:** Confidence. Wrong-part orders drop because incompatible SKUs are out of the way.
+
+### 4. Narrow, then see why a result appeared
+
+**Show:** Toggle Brand, Price, or Rating. Sort Best match vs price. Point at the query summary and breadcrumbs.
+
+**On a part card:** Type chip, Mounts at (for example J6), Fits pills, and the line **Fits your NexBot R-20** when a robot is pinned.
+
+**Say:** Fitment is the relevance explanation — not a generic excerpt.
+
+**Value:** Clearer comparison of candidate parts against the installed series.
+
+### 5. Next action is a parts quote, not add to cart
+
+**Show:** **Add to your parts** on two cards. The sticky **Your parts** panel: robot context, table (category, class/type, mounts at, fits, price), mismatch row if something does not fit.
+
+**Say:** Procurement wants a list they can send onward. **Request a quote** and **Download parts list** are the handoff to CPQ or a distributor portal.
+
+Do not dwell if the buttons do not call a backend. The list is the payload.
+
+**Value:** A conversion event manufacturing actually has.
+
+### 6. Not every question is a SKU
+
+**Show:** Circular chat control, **top right**. Starter chip or:
 
 > How do I spec a MIG welding cell?
 
-or use the starter chip.
+**Say:** Cell-spec knowledge lives in articles. Conversational search answers on the page, with citations. A follow-up stays in the chat so the parts list and the robot pin do not move.
 
-The Agent streams a markdown answer with blog citations and will name real SKUs when the knowledge base has them. Ask a follow-up **in the chatbot** (not the catalogue search box) so the parts grid and the Compatible Robots pin stay put. Close the popover with the button, Escape, or a click outside — the catalogue does not change.
+**Value:** Self-service. Fewer “call an applications engineer” loops on spec questions.
 
-If the chat control is missing or the answer 403s, the anonymous key is missing **Execute agent queries** — that is an org privilege, not a UI bug. The rest of the page is still the deliverable.
+Close chat (button, Escape, or click outside) and leave the catalogue as it is.
 
-## Q&A notes
+## If they object
 
-- **RGA vs Search Agent:** RGA is the single-turn ancestor. This org has a Search Agent on blog content; the demo calls it conversational search. Do not also mount a one-shot RGA widget — they compete for the same slot.
-- **Why two engines:** Commerce for products; Search API `default` pipeline for the Agent chatbot. Asking in the chat does not search the catalogue.
-- **Why custom Headless:** Atomic Commerce would drop Compatible Robots on every new query, and it joins multi-select as `R-20,C-10`.
+| They say | You say |
+| --- | --- |
+| Why did welding arm return torches? | That is the catalog: parts that fit a welding cell, not a robot showroom. Coveo is following the index, not a spec sheet. |
+| Where is payload / reach / certification? | Not fields today. Category leaves encode payload bands for robots. Production is to index those specs so they can filter and rank — that is the Coveo catalog conversation. |
+| Can I compare three arms? | The buying motion here is parts against an installed series. Your parts is that comparison, including mismatch rows. |
+| Quote does nothing. | Demo handoff. The list is what CPQ would accept. |
+| Can chat add a part to the grid? | On purpose, no. Chat is knowledge. Catalogue search is products. Mixing them would wipe the fitment filter. |
+
+## If something breaks
+
+| What you see | What to do |
+| --- | --- |
+| Chat missing or 403 | The search key needs **Execute agent queries**. Say it is an org privilege. The catalogue demo still stands — do not fake an answer. |
+| Labels like `no-products` | Atomic assets did not copy. Restart Vite after `npm install`. Do not debug CSS in front of the customer. |
+| Pin drops after typing | Click **Find parts for this** again and continue. |
+| Agent cannot answer | Ask the cell-spec question above, not a random SKU. Knowledge is grounded on the blog index, not product JSON. |
+
+## If a technical buyer stays after
+
+Keep this short. The README has the implementation.
+
+- **Catalogue** uses Coveo Atomic for Commerce on a Commerce engine (product search, facets, grid).
+- **Chat** uses a separate Search engine and Search Agent on the blog index so a follow-up cannot clear Compatible Robots.
+- The pin that survives a new parts query is the industry customization: stock Commerce search would treat a new query like a new search and drop the series.
+
+Do not open DevTools unless they ask. Close on value: faster discovery, a comparison they can trust, self-service, and a quote list procurement will send.

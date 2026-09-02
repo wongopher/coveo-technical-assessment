@@ -53,11 +53,16 @@ catalogue search  → CommerceEngine → product grid + parts list
 chatbot question  → SearchEngine (pipeline: default) → Search Agent over the blog index
 ```
 
-Conversational search is a top-right chatbot. Questions asked there do not re-run Commerce search and do not clear a pinned Compatible Robots filter.
+**Connects to Coveo.** `src/engine.ts` builds a Headless `CommerceEngine` with the org ID, anonymous search token, `trackingId` `robomotion`, and locale `en` / `GB` / `GBP`. `AtomicCommerceInterface` (`type="search"`) sends product queries to the Commerce API. A second `SearchEngine` on pipeline `default` hosts the Search Agent. Chat does not re-run Commerce search and does not clear a pinned Compatible Robots filter.
+
+**Search state.** Headless owns query, facets, sort, and page. Atomic components subscribe to that engine. Compatible Robots is re-applied from a pin store when the buyer types a new parts query (stock Atomic would clear the facet). Card and parts-list state lives in module stores because Atomic mounts each product card in its own React root.
+
+**Renders results.** Atomic owns the search box, facets, breadbox, summary, product grid, pager, and empty state. Each card is a custom `ProductCard` template (fitment pills, “Fits your …”, pin / add-to-parts). **Your parts** is a page-level panel, not a Coveo widget.
+
+**Filtering.** The index returns five facets: Category, Compatible Robots, Brand, Price, Rating. Pinning a robot selects Compatible Robots on the engine so the rail, breadbox, and URL stay in sync. Further filters are stock Atomic.
 
 ## Assumptions
 
-- The anonymous key has **Execute agent queries** (verified against the EU KGAS route during catalog probe).
 - Listings and recommendations are **not configured** in this org, so they are not mounted.
 - `AtomicCommerceQueryError` is not mounted; empty catalog uses `AtomicCommerceNoProducts`.
 - Quote / download CTAs on **Your parts** are demo-only (no backend).
