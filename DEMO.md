@@ -19,7 +19,8 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 
 > RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — for example, an S-5 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
 
-Point at the chrome: **Industrial robotics · Parts & service**, and the hero **Find the right parts for your robot**. Then type.
+Bob as user story:
+> Bob is a plant engineer who services these robotic arms. He was tasked to audit the robots on the production floor and to come up with a list of spare and repair parts to send to their procurement team. He already knows the exact series of robots on the floor, and now he needs to know the parts.
 
 ## Walkthrough
 
@@ -29,7 +30,7 @@ Point at the chrome: **Industrial robotics · Parts & service**, and the hero **
 
 **Say:** A plant engineer starts in their language. Suggestions meet them there.
 
-**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog.
+**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog. Searching "arm" contextually leads to "torches" (along with the "End-of-Tooling Arm" category).
 
 **Point at the left rail:** Category, Compatible Robots, Brand, Price, Rating.
 
