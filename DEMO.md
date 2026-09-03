@@ -14,9 +14,11 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 - Ask follow-ups in the **chatbot** (top right), not in the catalogue search box. Chat must not look like it refreshed the parts grid.
 - Quote and download are demo buttons. Speak them as the handoff to CPQ, then move on.
 
-## Opening (about one minute)
+## Opening
 
 > RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — for example, an S-5 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
+
+Introduce Bob, the user story (see above).
 
 ## Walkthrough
 
