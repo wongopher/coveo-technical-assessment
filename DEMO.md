@@ -27,7 +27,7 @@ Introduce Bob, the user story (see above).
 
 > A plant engineer may already know the exact part number or a specific product keyword in their own language. Suggestions meet them there.
 
-**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog. Searching "arm" contextually leads to "torches" (along with the "End-of-Tooling Arm" category).
+**Expect:** The grid is welding **torches**, not arms. Name that out loud: this is a fitment / aftermarket catalog. Searching "arm" contextually leads to "torches" (along with the "End-of-Tooling Arm" category). Coveo understands intent.
 
 **Point at the left rail:** Category, Compatible Robots, Brand, Price, Rating.
 
