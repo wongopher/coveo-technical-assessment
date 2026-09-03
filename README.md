@@ -8,7 +8,6 @@ A manufacturing buyer search page for RoboMotion Industries: find a robot, pin t
 - **Atomic for Commerce** (`@coveo/atomic-react` 3.11 / `@coveo/headless` 3.49) on a Headless `CommerceEngine` for the product catalog. Atomic owns the search box, facets, breadbox, summary, product list, pager, and empty state. These versions are required for Search Agent `agent-id` on `atomic-generated-answer`.
 - **Custom Headless** for the robot-fitment journey (pin Compatible Robots across queries, split Atomic’s joined multi-select values, custom sort and page size, parts list).
 - **Sidecar SearchEngine** on the default Search API pipeline for conversational search (`atomic-generated-answer` with `agent-id`). Atomic Commerce cannot host generated answers against the product index.
-- Atomic for Commerce is **open beta**. That is a talking point, not a reason to switch to classic Search.
 
 Shared card/panel state lives in module stores (`configurationStore`, `robotFilterStore`) because Atomic mounts each product card in its own React root.
 
@@ -62,8 +61,6 @@ chatbot question  → SearchEngine (pipeline: default) → Search Agent over the
 - **Indexing gap vs the brief.** The PDF’s payload / reach / models list is not in the index. Facets returned: `ec_category` (hierarchical), `compatible_robot_series` (display name **Compatible Robots**, not “Compatible Robot Models”), `ec_brand`, `ec_price`, `ec_rating`. Payload, reach, precision, mounting, and certification are not structured fields and are not regexed out of `ec_shortdesc`. Payload bands exist only as category-leaf labels (e.g. `Large Articulated (50-200kg)`). Cards stay on structured fields, with one exception: robot series codes are parsed from `ec_name` when `compatible_robot_series` is missing on robot listings.
 - **Atomic clears facets on a new query.** Compatible Robots is re-applied from a pin store so the robot-then-parts journey survives typing.
 - **Joined series values.** Atomic may send `R-20,C-10` as one facet value. The request (and URL hash) are expanded back into real series codes before they leave the browser.
-- **Atomic for Commerce is open beta.** Labels showing as keys such as `no-products` usually mean Atomic assets failed to copy; `vite-plugin-static-copy` serves `@coveo/atomic` `assets`, `lang`, and `themes` from the public root.
 - Conversational search answers from the **blog** index (~1,400 docs), not from product JSON. The Agent names SKUs when the blogs mention them.
-- Headless v3 resolves the EU org via organization endpoints. `platform-eu` is not hardcoded.
 
 See [DEMO.md](DEMO.md) for a walkthrough.

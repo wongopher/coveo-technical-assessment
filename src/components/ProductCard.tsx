@@ -47,7 +47,11 @@ export function ProductCard({ product }: Props) {
   const fitsAnchor = matchingRobots.length > 0
 
   const startConfiguration = () => {
+    const pinning = !anchored
     toggleSelectedRobot(toAnchor(product))
+    if (pinning) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   return (
