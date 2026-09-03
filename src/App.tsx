@@ -50,7 +50,9 @@ export default function App() {
       <header className="masthead">
         <div className="masthead__inner">
           <div className="brand">
-            <span className="brand__mark" aria-hidden="true" />
+            <span className="brand__mark" aria-hidden="true">
+              <img src="/assets/robo_arm2.svg" alt="RoboMotion Industries" style={{width: '100%'}} />
+            </span>
             <div>
               <span className="brand__name">RoboMotion Industries</span>
               <span className="brand__tag">Industrial robotics · Parts &amp; service</span>
