@@ -2,9 +2,8 @@
 
 For demo presentations to a manufacturing prospect (plant engineering, aftermarket, procurement). You are showing RoboMotion Industries — a fictitious industrial robotics company — how Coveo turns a parts catalog into a fitment journey.
 
-The buyer already owns a **robot**. They need tooling and consumables that fit, then a list they can send to procurement. Do not demo a three-robot compare tray.
-
-Say **robot** whenever you point at the page (Compatible Robots, Find parts for your robot, Your parts). Say **welding arm** only when you click that query suggestion — then immediately: the grid is torches. Say **welding cell** only in the chatbot; that is a spec question, not a SKU.
+Bob as user story:
+> Bob is a plant engineer who services these robotic arms. He was tasked to audit the robots on the production floor and to come up with a list of spare and repair parts to send to their procurement team. He already knows the exact series of robots on the floor, and now he needs to know the parts.
 
 Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](README.md).
 
@@ -18,9 +17,6 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 ## Opening (about one minute)
 
 > RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — for example, an S-5 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
-
-Bob as user story:
-> Bob is a plant engineer who services these robotic arms. He was tasked to audit the robots on the production floor and to come up with a list of spare and repair parts to send to their procurement team. He already knows the exact series of robots on the floor, and now he needs to know the parts.
 
 ## Walkthrough
 
