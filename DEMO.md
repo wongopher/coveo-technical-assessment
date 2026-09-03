@@ -3,7 +3,7 @@
 For demo presentations to a manufacturing prospect (plant engineering, aftermarket, procurement). You are showing RoboMotion Industries — a fictitious industrial robotics company — how Coveo turns a parts catalog into a fitment journey.
 
 Bob as user story:
-> Bob is a plant engineer who services these robotic arms. He was tasked to audit the robots on the production floor and to come up with a list of spare and repair parts to send to their procurement team. He already knows the exact series of robots on the floor, and now he needs to know the parts.
+> Bob is a plant engineer who services robotic arms from RoboMotion. He was tasked to audit the robots on the production floor and to come up with a list of spare and repair parts to send to their procurement team. He already knows the exact series of robots on the floor, and now he needs to know the parts.
 
 Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](README.md).
 
