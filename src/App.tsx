@@ -51,7 +51,7 @@ export default function App() {
         <div className="masthead__inner">
           <div className="brand">
             <span className="brand__mark" aria-hidden="true">
-              <img src="/assets/robo_arm2.svg" alt="RoboMotion Industries" style={{width: '100%'}} />
+              <img src="/src/assets/robo_arm2.svg" alt="RoboMotion Industries" style={{width: '100%'}} />
             </span>
             <div>
               <span className="brand__name">RoboMotion Industries</span>

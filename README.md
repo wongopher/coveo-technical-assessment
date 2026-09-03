@@ -35,7 +35,7 @@ The key is anonymous-search scoped. It is still gitignored; never commit `.env`.
 
 ## Architecture
 
-![Architecture diagram](/assets/architecture_diagram.png)
+![Architecture diagram](/src/assets/architecture_diagram.png)
 
 **Connects to Coveo.** `src/engine.ts` builds a Headless `CommerceEngine` with the org ID, anonymous search token, `trackingId` `robomotion`, and locale `en` / `GB` / `GBP`. `AtomicCommerceInterface` (`type="search"`) sends product queries to the Commerce API. A second `SearchEngine` on pipeline `default` hosts the Search Agent. Chat does not re-run Commerce search and does not clear a pinned Compatible Robots filter.
 
