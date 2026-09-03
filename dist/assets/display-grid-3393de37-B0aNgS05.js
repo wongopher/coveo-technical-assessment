@@ -1,1 +1,0 @@
-import{c as e}from"./index-B7fxLJ5C.js";var t=({setRef:t},n)=>{let r;return e(`div`,{part:`result-list-grid-clickable-container outline`,ref:e=>{r=e,t(e)},onClick:e=>{var t;e.preventDefault(),(t=r?.querySelector(`atomic-result`))==null||t.click()}},...n)};export{t};

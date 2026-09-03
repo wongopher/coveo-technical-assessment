@@ -1,1 +1,0 @@
-import{l as e}from"./index-B7fxLJ5C.js";var t=class{constructor(t){e(this,t),this.label=void 0}};export{t as atomic_table_element};

@@ -1,1 +1,0 @@
-import{t as e}from"./event-utils-8de63ec3-kr-KvioE.js";var t=(t,n)=>{let r=e(`atomic/numberFormat`,t);if(n.dispatchEvent(r))throw Error(`The Atomic number format component was not handled, as it is not a child of a compatible component`)},n=(e,t)=>e.toLocaleString(t),r=e=>(t,n)=>t.toLocaleString(n,{style:`currency`,currency:e});export{n,t as r,r as t};

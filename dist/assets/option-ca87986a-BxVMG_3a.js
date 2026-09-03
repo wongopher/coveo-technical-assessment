@@ -1,1 +1,0 @@
-import{c as e}from"./index-B7fxLJ5C.js";import{t}from"./option-59961e69-jNv75FNK.js";var n=n=>{let{sort:i}=n,a=r(i);return e(t,{...n,label:a,value:a})};function r(e){return e.by===`relevance`?`relevance`:e.fields.map(e=>e.displayName||e.name).join(` `)}function i(e,t){let n={};return t.forEach(e=>{n[r(e)]=e}),n[e]}export{i as n,n as t};

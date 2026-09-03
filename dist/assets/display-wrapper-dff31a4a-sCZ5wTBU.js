@@ -1,1 +1,0 @@
-import{c as e}from"./index-B7fxLJ5C.js";var t=({display:t,listClasses:r},i)=>t===`table`?e(n,{listClasses:r},...i):e(n,{listClasses:r},e(`div`,{class:`list-root ${r}`,part:`result-list`},i)),n=({listClasses:t},n)=>e(`div`,{class:`list-wrapper ${t}`},...n);export{t};

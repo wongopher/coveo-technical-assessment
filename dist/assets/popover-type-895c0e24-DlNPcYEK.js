@@ -1,1 +1,0 @@
-import{t as e}from"./event-utils-8de63ec3-kr-KvioE.js";var t=`popover-nested`;function n(t,n){t.dispatchEvent(e(`atomic/initializePopover`,n))}export{t as n,n as t};

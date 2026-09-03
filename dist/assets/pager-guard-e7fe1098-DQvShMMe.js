@@ -1,1 +1,0 @@
-import{c as e,t}from"./index-B7fxLJ5C.js";import{n}from"./initialization-utils-18d62c3c-uA-afwMF.js";var r=(r,i)=>r.hasError||!r.isAppLoaded||!r.hasItems?e(n,null):e(t,null,...i);export{r as t};

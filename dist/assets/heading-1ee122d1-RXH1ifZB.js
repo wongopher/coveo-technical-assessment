@@ -1,1 +1,0 @@
-import{c as e}from"./index-B7fxLJ5C.js";var t=({level:t,...n},r)=>{let i=t>0&&t<=6?`h${t}`:`div`;return e(i,{...n},r)};export{t};

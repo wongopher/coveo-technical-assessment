@@ -1,1 +1,0 @@
-import{l as e}from"./index-B7fxLJ5C.js";var t=class{constructor(t){e(this,t),this.period=`past`,this.amount=1,this.period=`past`,this.unit=void 0,this.amount=1,this.label=void 0}};export{t as atomic_timeframe};

@@ -1,1 +1,0 @@
-function e(e){return e.replace(/[-[\]/{}()*+?.\\^$|]/g,`\\$&`)}function t(e){return e.split(``).map(e=>e.match(/(\d|\w)+/g)?e:e.charCodeAt(0)).join(``)}export{e as n,t};

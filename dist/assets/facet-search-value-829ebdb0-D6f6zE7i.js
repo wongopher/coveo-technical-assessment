@@ -1,1 +1,0 @@
-import{c as e,t}from"./index-B7fxLJ5C.js";import{t as n}from"./facet-value-0d24871a-BKGT4nlI.js";var r=9,i=({withSearch:n,canShowMoreValues:i,numberOfDisplayedValues:a},o)=>{if(n&&!(!i&&a<r))return e(t,null,o)},a=t=>e(n,{...t,facetState:`idle`});export{a as n,i as t};

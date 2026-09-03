@@ -1,1 +1,0 @@
-function e(e){return`caption-${e}`}function t(t,n){return n.getResourceBundle(n.language,e(t))||{}}function n(t,n,r){return r.t(n,{ns:e(t)})}export{n,t};

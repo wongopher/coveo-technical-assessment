@@ -1,1 +1,0 @@
-function e(e,t,n){return t.includes(n)?!1:e.length===0||e.includes(n)?!0:!n}export{e as t};

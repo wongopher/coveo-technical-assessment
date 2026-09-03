@@ -1,1 +1,0 @@
-import{l as e,o as t}from"./index-B7fxLJ5C.js";var n=class{constructor(t){e(this,t),this.expression=``,this.label=void 0,this.name=void 0,this.expression=``}get host(){return t(this)}};export{n as atomic_tab};

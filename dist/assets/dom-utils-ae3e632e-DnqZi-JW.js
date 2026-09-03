@@ -1,1 +1,0 @@
-function e(e,t){return e.x===t.x&&e.y===t.y&&e.width===t.width&&e.height===t.height}function t(e){return Array.from(e.children).map(e=>e.outerHTML).join(``)}export{e as n,t};

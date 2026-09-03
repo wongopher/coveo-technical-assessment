@@ -1,1 +1,0 @@
-import{c as e}from"./index-B7fxLJ5C.js";var t=({label:t},n)=>e(`fieldset`,{class:`contents`},e(`legend`,{class:`accessibility-only`},t),n);export{t};
