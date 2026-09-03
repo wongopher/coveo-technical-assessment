@@ -35,10 +35,7 @@ The key is anonymous-search scoped. It is still gitignored; never commit `.env`.
 
 ## Architecture
 
-```
-catalogue search  → CommerceEngine → product grid + parts list
-chatbot question  → SearchEngine (pipeline: default) → Search Agent over the blog index
-```
+![Architecture diagram](/public/architecture_diagram.png)
 
 **Connects to Coveo.** `src/engine.ts` builds a Headless `CommerceEngine` with the org ID, anonymous search token, `trackingId` `robomotion`, and locale `en` / `GB` / `GBP`. `AtomicCommerceInterface` (`type="search"`) sends product queries to the Commerce API. A second `SearchEngine` on pipeline `default` hosts the Search Agent. Chat does not re-run Commerce search and does not clear a pinned Compatible Robots filter.
 
@@ -52,14 +49,13 @@ chatbot question  → SearchEngine (pipeline: default) → Search Agent over the
 
 - Listings and recommendations are **not configured** in this org, so they are not mounted.
 - `AtomicCommerceQueryError` is not mounted; empty catalog uses `AtomicCommerceNoProducts`.
-- Quote / download CTAs on **Your parts** are demo-only (no backend).
-- Sort: the Commerce API advertises only relevance, but honours explicit `ec_price` / `ec_rating` field sorts. The page uses a custom `SortControl` for that reason.
+- Sort: the Commerce API advertises only relevance in documentation, but honours explicit `ec_price` / `ec_rating` field sorts. The page uses a custom `SortControl` for that reason.
 
 ## Known limits
 
-- **Fitment catalog, not a robot catalog.** The live org has 1,242 products, of which **61 are Robots**. A `welding arm` query returns welding **torches**. That is the index, not a ranking bug.
-- **Indexing gap vs the brief.** The PDF’s payload / reach / models list is not in the index. Facets returned: `ec_category` (hierarchical), `compatible_robot_series` (display name **Compatible Robots**, not “Compatible Robot Models”), `ec_brand`, `ec_price`, `ec_rating`. Payload, reach, precision, mounting, and certification are not structured fields and are not regexed out of `ec_shortdesc`. Payload bands exist only as category-leaf labels (e.g. `Large Articulated (50-200kg)`). Cards stay on structured fields, with one exception: robot series codes are parsed from `ec_name` when `compatible_robot_series` is missing on robot listings.
+- **Indexing gap vs the brief.** The assignment suggests payload / reach / models as filters, but they are not in the index. Facets returned: `ec_category` (hierarchical), `compatible_robot_series` (display name **Compatible Robots**, not “Compatible Robot Models”), `ec_brand`, `ec_price`, `ec_rating`. Payload, reach, precision, mounting, and certification are not structured fields and are not regexed out of `ec_shortdesc`. Payload bands exist only as category-leaf labels (e.g. `Large Articulated (50-200kg)`). Cards stay on structured fields, with one exception: robot series codes are parsed from `ec_name` when `compatible_robot_series` is missing on robot listings.
 - **Atomic clears facets on a new query.** Compatible Robots is re-applied from a pin store so the robot-then-parts journey survives typing.
+- **Conversion is placeholder.** Quote / download CTAs are placeholders, no backend for demo.
 - **Joined series values.** Atomic may send `R-20,C-10` as one facet value. The request (and URL hash) are expanded back into real series codes before they leave the browser.
 - Conversational search answers from the **blog** index (~1,400 docs), not from product JSON. The Agent names SKUs when the blogs mention them.
 
