@@ -1,6 +1,6 @@
 # RoboMotion demo script
 
-For **sales engineers and AEs**. About **eight minutes** with a manufacturing prospect (plant engineering, aftermarket, procurement). You are showing RoboMotion Industries — a fictitious industrial robotics company — how Coveo turns a parts catalog into a fitment journey.
+For demo presentations to a manufacturing prospect (plant engineering, aftermarket, procurement). You are showing RoboMotion Industries — a fictitious industrial robotics company — how Coveo turns a parts catalog into a fitment journey.
 
 The buyer already owns a **robot**. They need tooling and consumables that fit, then a list they can send to procurement. Do not demo a three-robot compare tray.
 
