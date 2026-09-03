@@ -10,9 +10,8 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 ## Before you go live
 
 - Use this path: `weld` → **welding arm** → **Find parts for your robot** → pin an **S-5** → add two parts → chat **How do I spec a MIG welding cell?**
-- Do not search `payload 50kg`. That is not a field in this catalog.
 - Ask follow-ups in the **chatbot** (top right), not in the catalogue search box. Chat must not look like it refreshed the parts grid.
-- Quote and download are demo buttons. Speak them as the handoff to CPQ, then move on.
+- Quote and download are demo buttons. Speak about them as the handoff to CPQ.
 
 ## Opening
 
