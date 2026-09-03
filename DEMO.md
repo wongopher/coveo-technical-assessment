@@ -10,14 +10,14 @@ Run `npm run dev` and open the URL Vite prints. Full setup is in the [README](RE
 
 ## Before you go live
 
-- Use this path: `weld` → **welding arm** → **Find parts for your robot** → pin an **R-20** → add two parts → chat **How do I spec a MIG welding cell?**
+- Use this path: `weld` → **welding arm** → **Find parts for your robot** → pin an **S-5** → add two parts → chat **How do I spec a MIG welding cell?**
 - Do not search `payload 50kg`. That is not a field in this catalog.
 - Ask follow-ups in the **chatbot** (top right), not in the catalogue search box. Chat must not look like it refreshed the parts grid.
 - Quote and download are demo buttons. Speak them as the handoff to CPQ, then move on.
 
 ## Opening (about one minute)
 
-> RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — usually an R-20 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
+> RoboMotion sells industrial robots and the parts that service them. This catalogue is 1,242 products. Only 61 are robots. A plant engineer is not browsing that list. They know the robot on the line — for example, an S-5 — and they need the torch, scanner, and spares that actually fit. Wrong parts delay a line. Calling a distributor is the default today. I will pin the series, show only compatible parts, build a quote list, and ask a spec question without leaving the page.
 
 Point at the chrome: **Industrial robotics · Parts & service**, and the hero **Find the right parts for your robot**. Then type.
 
@@ -37,7 +37,7 @@ Point at the chrome: **Industrial robotics · Parts & service**, and the hero **
 
 ### 2. Start from the installed machine
 
-**Show:** **Find parts for your robot** (sidebar). Open a **NexBot R-20**.
+**Show:** **Find parts for your robot** (sidebar). Open a **NexBot S-5**.
 
 **Say:** Robots are a small slice of the catalog, so we give the buyer an explicit path to the machine already on the line.
 
@@ -57,7 +57,7 @@ Point at the chrome: **Industrial robotics · Parts & service**, and the hero **
 
 **Show:** Toggle Brand, Price, or Rating. Sort Best match vs price. Point at the query summary and breadcrumbs.
 
-**On a part card:** Type chip, Mounts at (for example J6), Fits pills, and the line **Fits your NexBot R-20** when a robot is pinned.
+**On a part card:** Type chip, Mounts at (for example J6), Fits pills, and the line **Fits your NexBot S-5** when a robot is pinned.
 
 **Say:** Fitment is the relevance explanation — not a generic excerpt.
 
